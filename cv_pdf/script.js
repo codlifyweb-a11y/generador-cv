@@ -341,10 +341,8 @@ function updateCV() {
   });
 }
 
-function saveSection(section) {
-  updateCV();
-
-  const sections = {
+function getSectionsData() {
+  return {
     datosPersonales: {
       name: cvData.name,
       title: cvData.title,
@@ -364,8 +362,12 @@ function saveSection(section) {
     educacion: cvData.education,
     cursos: cvData.courses,
   };
+}
 
-  const data = sections[section];
+function saveSection(section) {
+  updateCV();
+
+  const data = getSectionsData()[section];
   if (data === undefined) {
     console.error(`La sección "${section}" no existe.`);
     return;
@@ -377,6 +379,20 @@ function saveSection(section) {
   } catch (error) {
     console.error(`No se pudo guardar la sección "${section}".`, error);
     alert("No se pudo guardar la sección. Revisa el almacenamiento del navegador.");
+  }
+}
+
+function saveAllSections() {
+  updateCV();
+
+  try {
+    Object.entries(getSectionsData()).forEach(([section, data]) => {
+      localStorage.setItem(`cv_${section}`, JSON.stringify(data));
+    });
+    alert("Todas las secciones se guardaron correctamente.");
+  } catch (error) {
+    console.error("No se pudieron guardar todas las secciones.", error);
+    alert("No se pudieron guardar todas las secciones. Revisa el almacenamiento del navegador.");
   }
 }
 
