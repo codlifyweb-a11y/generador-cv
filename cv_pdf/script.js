@@ -61,6 +61,7 @@ let cvData = {
 };
 
 function init() {
+  loadSavedSections();
   loadFormData();
   updateCV();
 }
@@ -340,6 +341,97 @@ function updateCV() {
   });
 }
 
+function saveSection(section) {
+  updateCV();
+
+  const sections = {
+    datosPersonales: {
+      name: cvData.name,
+      title: cvData.title,
+      location: cvData.location,
+      phone: cvData.phone,
+      email: cvData.email,
+    },
+    perfil: {
+      profile: cvData.profile,
+    },
+    experiencia: cvData.experiences,
+    competencias: {
+      techSkills: cvData.techSkills,
+      tools: cvData.tools,
+      languages: cvData.languages,
+    },
+    educacion: cvData.education,
+    cursos: cvData.courses,
+  };
+
+  const data = sections[section];
+  if (data === undefined) {
+    console.error(`La sección "${section}" no existe.`);
+    return;
+  }
+
+  try {
+    localStorage.setItem(`cv_${section}`, JSON.stringify(data));
+    alert("Sección guardada correctamente.");
+  } catch (error) {
+    console.error(`No se pudo guardar la sección "${section}".`, error);
+    alert("No se pudo guardar la sección. Revisa el almacenamiento del navegador.");
+  }
+}
+
+function loadSavedSections() {
+  const savedSections = [
+    {
+      key: "cv_datosPersonales",
+      apply(data) {
+        Object.assign(cvData, data);
+      },
+    },
+    {
+      key: "cv_perfil",
+      apply(data) {
+        Object.assign(cvData, data);
+      },
+    },
+    {
+      key: "cv_experiencia",
+      apply(data) {
+        cvData.experiences = data;
+      },
+    },
+    {
+      key: "cv_competencias",
+      apply(data) {
+        Object.assign(cvData, data);
+      },
+    },
+    {
+      key: "cv_educacion",
+      apply(data) {
+        cvData.education = data;
+      },
+    },
+    {
+      key: "cv_cursos",
+      apply(data) {
+        cvData.courses = data;
+      },
+    },
+  ];
+
+  savedSections.forEach(({ key, apply }) => {
+    const savedData = localStorage.getItem(key);
+    if (!savedData) return;
+
+    try {
+      apply(JSON.parse(savedData));
+    } catch (error) {
+      console.error(`No se pudo cargar la sección "${key}".`, error);
+    }
+  });
+}
+
 function resetToDefaultData() {
   cvData = {
     name: "Esperanza Martinez",
@@ -401,6 +493,14 @@ function resetToDefaultData() {
       },
     ],
   };
+  [
+    "cv_datosPersonales",
+    "cv_perfil",
+    "cv_experiencia",
+    "cv_competencias",
+    "cv_educacion",
+    "cv_cursos",
+  ].forEach((key) => localStorage.removeItem(key));
   loadFormData();
   updateCV();
 }

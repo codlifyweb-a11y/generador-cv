@@ -64,10 +64,18 @@
             class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
           >
             <h2
-              class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2"
+              class="text-base font-semibold text-slate-800 mb-4 flex items-center justify-between gap-2 border-b pb-2"
             >
-              <i class="fa-solid fa-user text-sky-600"></i> Datos Personales y
-              Encabezado
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-user text-sky-600"></i> Datos Personales
+                y Encabezado
+              </span>
+              <button
+                onclick="saveSection('datosPersonales')"
+                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+              >
+                <i class="fa-solid fa-floppy-disk"></i> Guardar sección
+              </button>
             </h2>
             <div class="space-y-4">
               <div>
@@ -140,10 +148,18 @@
             class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
           >
             <h2
-              class="text-base font-semibold text-slate-800 mb-3 flex items-center gap-2 border-b pb-2"
+              class="text-base font-semibold text-slate-800 mb-3 flex items-center justify-between gap-2 border-b pb-2"
             >
-              <i class="fa-solid fa-address-card text-sky-600"></i> Perfil /
-              Resumen Profesional
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-address-card text-sky-600"></i> Perfil /
+                Resumen Profesional
+              </span>
+              <button
+                onclick="saveSection('perfil')"
+                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+              >
+                <i class="fa-solid fa-floppy-disk"></i> Guardar sección
+              </button>
             </h2>
             <div>
               <textarea
@@ -167,12 +183,20 @@
                 <i class="fa-solid fa-briefcase text-sky-600"></i> Experiencia
                 Laboral
               </h2>
-              <button
-                onclick="addExperience()"
-                class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
-              >
-                <i class="fa-solid fa-plus"></i> Añadir Empleo
-              </button>
+              <div class="flex items-center gap-2">
+                <button
+                  onclick="saveSection('experiencia')"
+                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <button
+                  onclick="addExperience()"
+                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-plus"></i> Añadir Empleo
+                </button>
+              </div>
             </div>
             <div id="experienceList" class="space-y-4">
               <!-- Dynamic Experience Items insert here -->
@@ -184,9 +208,18 @@
             class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
           >
             <h2
-              class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2"
+              class="text-base font-semibold text-slate-800 mb-4 flex items-center justify-between gap-2 border-b pb-2"
             >
-              <i class="fa-solid fa-list-check text-sky-600"></i> Competencias
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-sky-600"></i>
+                Competencias
+              </span>
+              <button
+                onclick="saveSection('competencias')"
+                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+              >
+                <i class="fa-solid fa-floppy-disk"></i> Guardar sección
+              </button>
             </h2>
             <div class="space-y-4">
               <div>
@@ -239,12 +272,20 @@
                 <i class="fa-solid fa-graduation-cap text-sky-600"></i>
                 Educación / Formación
               </h2>
-              <button
-                onclick="addEducation()"
-                class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
-              >
-                <i class="fa-solid fa-plus"></i> Añadir Estudio
-              </button>
+              <div class="flex items-center gap-2">
+                <button
+                  onclick="saveSection('educacion')"
+                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <button
+                  onclick="addEducation()"
+                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-plus"></i> Añadir Estudio
+                </button>
+              </div>
             </div>
             <div id="educationList" class="space-y-3">
               <!-- Dynamic Education Items insert here -->
@@ -262,12 +303,20 @@
                 <i class="fa-solid fa-certificate text-sky-600"></i> Formación
                 Adicional / Cursos
               </h2>
-              <button
-                onclick="addCourse()"
-                class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
-              >
-                <i class="fa-solid fa-plus"></i> Añadir Curso
-              </button>
+              <div class="flex items-center gap-2">
+                <button
+                  onclick="saveSection('cursos')"
+                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <button
+                  onclick="addCourse()"
+                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-plus"></i> Añadir Curso
+                </button>
+              </div>
             </div>
             <div id="coursesList" class="space-y-3">
               <!-- Dynamic Course Items insert here -->
