@@ -523,11 +523,19 @@ function resetToDefaultData() {
 
 function downloadPDF() {
   const element = document.getElementById("cvPreview");
+  const filenameName = (cvData.name || "Curriculum")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .join("")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z]/g, "");
 
   // Opciones optimizadas de html2pdf para evitar paginación extra en blanco
   const opt = {
     margin: 0,
-    filename: `CV_${(cvData.name || "Curriculum").replace(/\s+/g, "_")}.pdf`,
+    filename: `CV_${filenameName}.pdf`,
     image: { type: "jpeg", quality: 0.98 },
     html2canvas: {
       scale: 2,
