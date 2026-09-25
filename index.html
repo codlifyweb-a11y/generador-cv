@@ -3,7 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curriculum Vitae - Adrian Hernandez</title>
+    <title>
+      Generador de Curriculum Vitae ATS - Crea y Exporta tu CV a PDF
+    </title>
+    <meta
+      name="description"
+      content="Crea, edita y descarga gratis tu Curriculum Vitae optimizado para sistemas ATS. Vista previa en tiempo real y exportación a PDF."
+    />
+    <!-- ========================================== -->
+    <!-- ETIQUETAS OPEN GRAPH (WhatsApp, LinkedIn, Meta) -->
+    <!-- ========================================== -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://codlifyweb-a11y.github.io/generador-cv/"
+    />
+    <meta
+      property="og:title"
+      content="Generador de Curriculum Vitae ATS Gratis"
+    />
+    <meta
+      property="og:description"
+      content="Crea y edita tu CV optimizado para filtros ATS en minutos. Descárgalo directo en PDF."
+    />
+    <!-- URL ABSOLUTA a la imagen de 1200x630px -->
+    <meta
+      property="og:image"
+      content="https://codlifyweb-a11y.github.io/generador-cv/og-image.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/webp" />
+
+    <!-- ========================================== -->
+    <!-- ETIQUETAS TWITTER / X -->
+    <!-- ========================================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://codlifyweb-a11y.github.io/generador-cv/"
+    />
+    <meta
+      name="twitter:title"
+      content="Generador de Curriculum Vitae ATS Gratis"
+    />
+    <meta
+      name="twitter:description"
+      content="Crea y edita tu CV optimizado para filtros ATS en minutos. Descárgalo directo en PDF."
+    />
+    <meta
+      name="twitter:image"
+      content="https://codlifyweb-a11y.github.io/generador-cv/og-image.webp"
+    />
+
+    <!-- Estilos e Integraciones externas existentes -->
     <link rel="stylesheet" href="style.css" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,66 +76,99 @@
   <body class="h-screen flex flex-col overflow-hidden">
     <!-- Navbar Navigation -->
     <header
-      class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center z-10 shadow-md no-print shrink-0"
+      class="bg-slate-900 text-white px-4 py-3 sm:px-6 flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-0 z-10 shadow-md no-print shrink-0"
     >
-      <div class="flex items-center space-x-3">
-        <i class="fa-solid fa-file-invoice text-sky-400 text-2xl"></i>
+      <!-- Sección de Branding/Título -->
+      <div class="flex items-center space-x-3 text-center sm:text-left">
+        <i
+          class="fa-solid fa-file-invoice text-sky-400 text-xl sm:text-2xl shrink-0"
+        ></i>
         <div>
-          <h1 class="font-bold text-lg leading-tight">
+          <h1 class="font-bold text-base sm:text-lg xl:text-xl leading-tight">
             Generador de CV Profesional
           </h1>
-          <p class="text-xs text-slate-400">
+          <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block">
             Diseño Optimizado para Reclutamiento & ATS
           </p>
         </div>
       </div>
-      <div class="flex items-center space-x-3">
-        <button
-          onclick="saveAllSections()"
-          class="px-3 py-1.5 text-xs text-white hover:bg-green-500 bg-green-600 rounded-lg transition flex items-center gap-1.5"
+
+      <!-- Sección de Acciones / Botones -->
+      <div
+        class="flex w-full lg:w-auto flex-col lg:flex-row items-center justify-center gap-3 lg:gap-0 lg:space-x-3"
+      >
+        <a
+          href="./ejemplo_Image/cv_ejemplo.jpeg"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline inline-flex w-full lg:w-auto justify-center items-center gap-1.5 text-slate-200 hover:text-white transition"
         >
-          <i class="fa-solid fa-floppy-disk"></i> Guardar todo
-        </button>
-        <button
-          onclick="resetToDefaultData()"
-          class="px-3 py-1.5 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700 flex items-center gap-1.5"
+          <i class="fa-solid fa-eye"></i>
+          <span class="text-xs sm:text-sm">Ver un ejemplo de este formato</span>
+        </a>
+
+        <div
+          class="flex w-full lg:w-auto items-center justify-center gap-2 sm:gap-3"
         >
-          <i class="fa-solid fa-rotate-left"></i> Restablecer Ejemplo
-        </button>
-        <button
-          onclick="downloadPDF()"
-          class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-medium text-sm rounded-lg shadow-sm transition flex items-center gap-2"
-        >
-          <i class="fa-solid fa-file-pdf"></i> Descargar PDF
-        </button>
+          <button
+            onclick="saveAllSections()"
+            class="hidden lg:inline-flex flex-1 lg:flex-none px-2.5 py-1.5 sm:px-3 text-xs text-white hover:bg-green-500 bg-green-600 rounded-lg transition items-center justify-center gap-1.5 shrink-0"
+          >
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Guardar todo</span>
+          </button>
+
+          <button
+            onclick="resetToDefaultData()"
+            class="inline-flex flex-1 lg:flex-none px-2.5 py-1.5 sm:px-3 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700 items-center justify-center gap-1.5 shrink-0"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Restablecer</span>
+          </button>
+
+          <button
+            onclick="downloadPDF()"
+            class="inline-flex flex-1 lg:flex-none px-3 py-1.5 sm:px-4 sm:py-2 bg-sky-600 hover:bg-sky-500 text-white font-medium text-xs sm:text-sm rounded-lg shadow-sm transition items-center justify-center gap-2 shrink-0"
+          >
+            <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+          </button>
+        </div>
       </div>
     </header>
 
     <!-- Main Container: Split Screen -->
-    <div class="flex-1 flex overflow-hidden">
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
       <!-- Left Panel: Interactive Form -->
       <section
+        id="formPanel"
         class="w-full lg:w-1/2 h-full overflow-y-auto custom-scrollbar p-6 bg-slate-50 border-r border-slate-200 no-print"
       >
-        <div class="max-w-2xl mx-auto space-x-0 space-y-6">
+        <div class="max-w-2xl mx-auto space-y-6">
           <!-- Datos Personales -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-1"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <h2
-              class="text-base font-semibold text-slate-800 mb-4 flex items-center justify-between gap-2 border-b pb-2"
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 mb-4"
             >
-              <span class="flex items-center gap-2">
-                <i class="fa-solid fa-user text-sky-600"></i> Datos Personales
-                y Encabezado
-              </span>
+              <h2
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-user text-sky-600"></i>
+                <span>Datos Personales y Encabezado</span>
+              </h2>
               <button
+                type="button"
                 onclick="saveSection('datosPersonales')"
-                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 self-start sm:self-auto shrink-0"
               >
                 <i class="fa-solid fa-floppy-disk"></i> Guardar sección
               </button>
-            </h2>
+            </div>
+
+            <!-- Campos del Formulario -->
             <div class="space-y-4">
               <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1"
@@ -108,19 +194,8 @@
                   class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
                 />
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div>
-                  <label class="block text-xs font-semibold text-slate-600 mb-1"
-                    >Ubicación / País</label
-                  >
-                  <input
-                    type="text"
-                    id="inputLocation"
-                    oninput="updateCV()"
-                    placeholder="México"
-                    class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
-                  />
-                </div>
+              <!-- Grid Adaptativo: 1 col en móvil, 2 en sm, 3 en md+ -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1"
                     >Teléfono</label
@@ -133,7 +208,7 @@
                     class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
                   />
                 </div>
-                <div>
+                <div class="sm:col-span-2 md:col-span-1">
                   <label class="block text-xs font-semibold text-slate-600 mb-1"
                     >Correo Electrónico</label
                   >
@@ -146,92 +221,195 @@
                   />
                 </div>
               </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1"
+                  >Ubicación / País</label
+                >
+                <input
+                  type="text"
+                  id="inputLocation"
+                  oninput="updateCV()"
+                  placeholder="México"
+                  class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <!-- Botones de Navegación del Paso -->
+            <div
+              class="mt-6 pt-4 border-t border-slate-100 lg:hidden flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('datosPersonales')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Perfil Profesional -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-2"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <h2
-              class="text-base font-semibold text-slate-800 mb-3 flex items-center justify-between gap-2 border-b pb-2"
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 mb-4"
             >
-              <span class="flex items-center gap-2">
-                <i class="fa-solid fa-address-card text-sky-600"></i> Perfil /
-                Resumen Profesional
-              </span>
+              <h2
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-address-card text-sky-600"></i>
+                <span>Perfil / Resumen Profesional</span>
+              </h2>
               <button
-                onclick="saveSection('perfil')"
-                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                type="button"
+                onclick="saveSectionSilently('perfil')"
+                class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 self-start sm:self-auto shrink-0"
               >
                 <i class="fa-solid fa-floppy-disk"></i> Guardar sección
               </button>
-            </h2>
+            </div>
+
+            <!-- Contenido del Campo -->
             <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">
+                Resumen Ejecutivo / Breve Descripción
+              </label>
               <textarea
                 id="inputProfile"
                 oninput="updateCV()"
-                rows="3"
-                placeholder="Resumen conciso de tus habilidades principales y trayectoria..."
-                class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                rows="4"
+                placeholder="Resumen conciso de tus habilidades principales, logros clave y trayectoria profesional..."
+                class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none resize-y"
               ></textarea>
+            </div>
+
+            <!-- Botones de Navegación del Paso -->
+            <div
+              class="mt-6 pt-4 border-t border-slate-100 lg:hidden flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('perfil')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Experiencia Laboral -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-3"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <div class="flex justify-between items-center border-b pb-2 mb-4">
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3 mb-4"
+            >
               <h2
-                class="text-base font-semibold text-slate-800 flex items-center gap-2"
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
               >
-                <i class="fa-solid fa-briefcase text-sky-600"></i> Experiencia
-                Laboral
+                <i class="fa-solid fa-briefcase text-sky-600"></i>
+                <span>Experiencia Laboral</span>
               </h2>
-              <div class="flex items-center gap-2">
+
+              <!-- Botones de Acción de la Sección -->
+              <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                 <button
+                  type="button"
                   onclick="saveSection('experiencia')"
-                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                  class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 shrink-0"
                 >
-                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar sección
                 </button>
+
                 <button
+                  type="button"
                   onclick="addExperience()"
-                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                  class="w-full lg:w-auto text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center justify-center gap-1 shrink-0"
                 >
                   <i class="fa-solid fa-plus"></i> Añadir Empleo
                 </button>
               </div>
             </div>
+
+            <!-- Lista Dinámica de Experiencias -->
             <div id="experienceList" class="space-y-4">
-              <!-- Dynamic Experience Items insert here -->
+              <!-- Los ítems dinámicos agregados vía JS deben usar este markup interno adaptativo -->
+            </div>
+
+            <!-- Botones de Navegación del Paso -->
+            <div
+              class="mt-6 pt-4 border-t border-slate-100 lg:hidden flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('experiencia')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Competencias -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-4"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <h2
-              class="text-base font-semibold text-slate-800 mb-4 flex items-center justify-between gap-2 border-b pb-2"
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 mb-4"
             >
-              <span class="flex items-center gap-2">
+              <h2
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
+              >
                 <i class="fa-solid fa-list-check text-sky-600"></i>
-                Competencias
-              </span>
+                <span>Competencias</span>
+              </h2>
               <button
-                onclick="saveSection('competencias')"
-                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                type="button"
+                onclick="saveSectionSilently('competencias')"
+                class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 self-start sm:self-auto shrink-0"
               >
                 <i class="fa-solid fa-floppy-disk"></i> Guardar sección
               </button>
-            </h2>
+            </div>
+
+            <!-- Campos del Formulario -->
             <div class="space-y-4">
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1"
-                  >Aptitudes Técnicas</label
-                >
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                  Aptitudes Técnicas
+                </label>
                 <input
                   type="text"
                   id="inputTechSkills"
@@ -240,10 +418,11 @@
                   class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
                 />
               </div>
+
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1"
-                  >Herramientas / Software</label
-                >
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                  Herramientas / Software
+                </label>
                 <input
                   type="text"
                   id="inputTools"
@@ -252,10 +431,11 @@
                   class="w-full text-sm p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
                 />
               </div>
+
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1"
-                  >Idiomas (Opcional)</label
-                >
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                  Idiomas (Opcional)
+                </label>
                 <input
                   type="text"
                   id="inputLanguages"
@@ -265,67 +445,153 @@
                 />
               </div>
             </div>
+
+            <!-- Botones de Navegación del Paso Final -->
+            <div
+              class="mt-6 pt-4 border-t border-slate-100 lg:hidden flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('competencias')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Educación -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-5"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <div class="flex justify-between items-center border-b pb-2 mb-4">
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3 mb-4"
+            >
               <h2
-                class="text-base font-semibold text-slate-800 flex items-center gap-2"
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
               >
                 <i class="fa-solid fa-graduation-cap text-sky-600"></i>
-                Educación / Formación
+                <span>Educación / Formación</span>
               </h2>
-              <div class="flex items-center gap-2">
+
+              <!-- Botones de Acción de la Sección -->
+              <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                 <button
-                  onclick="saveSection('educacion')"
-                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                  type="button"
+                  onclick="saveSectionSilently('educacion')"
+                  class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 shrink-0"
                 >
-                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar sección
                 </button>
+
                 <button
+                  type="button"
                   onclick="addEducation()"
-                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                  class="w-full lg:w-auto text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center justify-center gap-1 shrink-0"
                 >
                   <i class="fa-solid fa-plus"></i> Añadir Estudio
                 </button>
               </div>
             </div>
+
+            <!-- Lista Dinámica de Estudios -->
             <div id="educationList" class="space-y-3">
-              <!-- Dynamic Education Items insert here -->
+              <!-- Los ítems dinámicos agregados vía JS se insertan aquí -->
+            </div>
+
+            <!-- Botones de Navegación del Paso Final -->
+            <div
+              class="mt-6 pt-4 border-t lg:hidden border-slate-100 flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('educacion')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Formación Adicional -->
           <div
-            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+            id="step-6"
+            class="step-card bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200"
           >
-            <div class="flex justify-between items-center border-b pb-2 mb-4">
+            <!-- Encabezado de la Sección -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3 mb-4"
+            >
               <h2
-                class="text-base font-semibold text-slate-800 flex items-center gap-2"
+                class="text-sm sm:text-base font-semibold text-slate-800 flex items-center gap-2"
               >
-                <i class="fa-solid fa-certificate text-sky-600"></i> Formación
-                Adicional / Cursos
+                <i class="fa-solid fa-certificate text-sky-600"></i>
+                <span>Formación Adicional / Cursos</span>
               </h2>
-              <div class="flex items-center gap-2">
+
+              <!-- Botones de Acción de la Sección -->
+              <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                 <button
-                  onclick="saveSection('cursos')"
-                  class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition flex items-center gap-1"
+                  type="button"
+                  onclick="saveSectionSilently('cursos')"
+                  class="hidden lg:flex text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-1.5 px-3 rounded-lg border border-green-200 transition items-center justify-center gap-1 shrink-0"
                 >
-                  <i class="fa-solid fa-floppy-disk"></i> Guardar
+                  <i class="fa-solid fa-floppy-disk"></i> Guardar sección
                 </button>
+
                 <button
+                  type="button"
                   onclick="addCourse()"
-                  class="text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center gap-1"
+                  class="w-full lg:w-auto text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-1.5 px-3 rounded-lg border border-sky-200 transition flex items-center justify-center gap-1 shrink-0"
                 >
                   <i class="fa-solid fa-plus"></i> Añadir Curso
                 </button>
               </div>
             </div>
+
+            <!-- Lista Dinámica de Cursos -->
             <div id="coursesList" class="space-y-3">
-              <!-- Dynamic Course Items insert here -->
+              <!-- Los ítems dinámicos agregados vía JS se insertan aquí -->
+            </div>
+
+            <!-- Botones de Navegación del Paso Final -->
+            <div
+              class="mt-6 pt-4 border-t border-slate-100 lg:hidden flex items-center justify-between gap-3"
+            >
+              <button
+                type="button"
+                onclick="prevStep()"
+                class="btn-prev px-4 py-2 text-xs sm:text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-arrow-left"></i> Atrás
+              </button>
+
+              <button
+                type="button"
+                onclick="nextStep('cursos')"
+                class="btn-next px-4 py-2 text-xs sm:text-sm text-white bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm"
+              >
+                <span>Finalizar y Ver PDF</span>
+                <i class="fa-solid fa-eye"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -333,9 +599,35 @@
 
       <!-- Right Panel: Live A4 Resume Preview -->
       <section
-        class="w-full lg:w-1/2 h-full overflow-y-auto custom-scrollbar p-6 bg-slate-300 flex justify-center items-start"
+        id="previewPanel"
+        class="hidden lg:flex w-full lg:w-1/2 h-full overflow-y-auto custom-scrollbar bg-slate-300 p-4 sm:p-6 justify-center items-start flex-col lg:flex-row relative"
       >
-        <div id="cvPreview" class="a4-page text-slate-800">
+        <!-- Barra de Acciones Móvil/Tablet (Solo visible en dispositivos móviles al llegar al final) -->
+        <div
+          class="lg:hidden w-full max-w-2xl mx-auto mb-4 bg-slate-900 text-white p-3 rounded-xl shadow-lg flex items-center justify-between gap-2 shrink-0"
+        >
+          <button
+            type="button"
+            onclick="returnToForm()"
+            class="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg flex items-center gap-1.5 border border-slate-700 transition"
+          >
+            <i class="fa-solid fa-arrow-left"></i> Editar Datos
+          </button>
+
+          <button
+            type="button"
+            onclick="downloadPDF()"
+            class="px-3.5 py-1.5 text-xs bg-sky-600 hover:bg-sky-500 text-white font-medium rounded-lg flex items-center gap-1.5 shadow transition"
+          >
+            <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+          </button>
+        </div>
+
+        <!-- Hoja Renderizada A4 -->
+        <div
+          id="cvPreview"
+          class="a4-page text-slate-800 mx-auto shadow-2xl bg-white w-full"
+        >
           <!-- Encabezado / Header -->
           <div class="text-center mb-5">
             <h1
@@ -377,7 +669,7 @@
               EXPERIENCIA LABORAL
             </h3>
             <div id="previewExperience" class="space-y-4">
-              <!-- Experience Items Rendered Here -->
+              <!-- Dynamic Experience Items -->
             </div>
           </div>
 
@@ -412,7 +704,7 @@
               EDUCACIÓN
             </h3>
             <div id="previewEducation" class="space-y-2">
-              <!-- Education items rendered here -->
+              <!-- Dynamic Education Items -->
             </div>
           </div>
 
@@ -427,7 +719,7 @@
               id="previewCourses"
               class="text-xs text-slate-700 space-y-1 pl-4 list-disc"
             >
-              <!-- Courses rendered here -->
+              <!-- Dynamic Course Items -->
             </ul>
           </div>
         </div>

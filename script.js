@@ -90,12 +90,14 @@ function renderExperienceForm() {
   cvData.experiences.forEach((exp) => {
     const item = document.createElement("div");
     item.className =
-      "p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-3 relative group";
+      "p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-3 relative group overflow-hidden";
     item.innerHTML = `
-                    <button onclick="removeExperience(${exp.id})" class="absolute top-3 right-3 text-red-500 hover:text-red-700 text-xs font-semibold flex items-center gap-1">
-                        <i class="fa-solid fa-trash-can"></i> Eliminar
-                    </button>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pr-16">
+                    <div class="flex justify-end">
+                        <button onclick="removeExperience(${exp.id})" class="text-red-500 hover:text-red-700 text-xs font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-trash-can"></i> Eliminar
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
                         <div>
                             <label class="block text-[11px] font-semibold text-slate-600 mb-0.5">Empresa</label>
                             <input type="text" value="${escapeHtml(exp.company)}" oninput="updateExperience(${exp.id}, 'company', this.value)"
@@ -107,7 +109,7 @@ function renderExperienceForm() {
                                 class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-1 focus:ring-sky-500">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
                         <div>
                             <label class="block text-[11px] font-semibold text-slate-600 mb-0.5">Cargo / Puesto</label>
                             <input type="text" value="${escapeHtml(exp.role)}" oninput="updateExperience(${exp.id}, 'role', this.value)"
@@ -169,18 +171,29 @@ function updateExperienceBullets(id, value) {
 function renderEducationForm() {
   const container = document.getElementById("educationList");
   container.innerHTML = "";
+
   cvData.education.forEach((edu) => {
     const item = document.createElement("div");
-    item.className = "flex items-center gap-2";
+    item.className =
+      "flex flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50 p-2 sm:flex-row sm:items-center";
+
     item.innerHTML = `
-                    <input type="text" value="${escapeHtml(edu.degree)}" oninput="updateEducation(${edu.id}, 'degree', this.value)" placeholder="Título o Bachillerato" 
-                        class="flex-1 text-xs p-2 border border-slate-300 rounded">
-                    <input type="text" value="${escapeHtml(edu.period)}" oninput="updateEducation(${edu.id}, 'period', this.value)" placeholder="Año / Periodo" 
-                        class="w-28 text-xs p-2 border border-slate-300 rounded">
-                    <button onclick="removeEducation(${edu.id})" class="text-red-500 hover:text-red-700 p-2">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                `;
+      <div class="flex justify-end sm:hidden">
+        <button onclick="removeEducation(${edu.id})" class="rounded p-2 text-red-500 transition-colors hover:text-red-700">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-center w-full">
+        <input type="text" value="${escapeHtml(edu.degree)}" oninput="updateEducation(${edu.id}, 'degree', this.value)" placeholder="Título o Bachillerato"
+          class="w-full min-w-0 flex-1 text-xs p-2 border border-slate-300 rounded focus:ring-1 focus:ring-sky-500">
+        <input type="text" value="${escapeHtml(edu.period)}" oninput="updateEducation(${edu.id}, 'period', this.value)" placeholder="Año / Periodo"
+          class="w-full min-w-0 text-xs p-2 border border-slate-300 rounded focus:ring-1 focus:ring-sky-500 sm:w-28">
+      </div>
+      <button onclick="removeEducation(${edu.id})" class="hidden sm:inline-flex ml-auto self-end rounded p-2 text-red-500 transition-colors hover:text-red-700">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    `;
+
     container.appendChild(item);
   });
 }
@@ -213,16 +226,25 @@ function updateEducation(id, field, value) {
 function renderCoursesForm() {
   const container = document.getElementById("coursesList");
   container.innerHTML = "";
+
   cvData.courses.forEach((c) => {
     const item = document.createElement("div");
-    item.className = "flex items-center gap-2";
+    item.className =
+      "flex flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50 p-2 sm:flex-row sm:items-center";
+
     item.innerHTML = `
-                    <input type="text" value="${escapeHtml(c.title)}" oninput="updateCourse(${c.id}, this.value)" placeholder="Nombre del curso | Institución | Fecha" 
-                        class="flex-1 text-xs p-2 border border-slate-300 rounded">
-                    <button onclick="removeCourse(${c.id})" class="text-red-500 hover:text-red-700 p-2">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                `;
+      <div class="flex justify-end sm:hidden">
+        <button onclick="removeCourse(${c.id})" class="rounded p-2 text-red-500 transition-colors hover:text-red-700">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <input type="text" value="${escapeHtml(c.title)}" oninput="updateCourse(${c.id}, this.value)" placeholder="Nombre del curso | Institución | Fecha"
+        class="w-full min-w-0 text-xs p-2 border border-slate-300 rounded focus:ring-1 focus:ring-sky-500 sm:flex-1">
+      <button onclick="removeCourse(${c.id})" class="hidden sm:inline-flex ml-auto self-end rounded p-2 text-red-500 transition-colors hover:text-red-700">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    `;
+
     container.appendChild(item);
   });
 }
@@ -378,7 +400,9 @@ function saveSection(section) {
     alert("Sección guardada correctamente.");
   } catch (error) {
     console.error(`No se pudo guardar la sección "${section}".`, error);
-    alert("No se pudo guardar la sección. Revisa el almacenamiento del navegador.");
+    alert(
+      "No se pudo guardar la sección. Revisa el almacenamiento del navegador.",
+    );
   }
 }
 
@@ -392,7 +416,9 @@ function saveAllSections() {
     alert("Todas las secciones se guardaron correctamente.");
   } catch (error) {
     console.error("No se pudieron guardar todas las secciones.", error);
-    alert("No se pudieron guardar todas las secciones. Revisa el almacenamiento del navegador.");
+    alert(
+      "No se pudieron guardar todas las secciones. Revisa el almacenamiento del navegador.",
+    );
   }
 }
 
