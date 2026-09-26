@@ -19,6 +19,21 @@ body {
   overflow: hidden; /* Garantiza que no sobresalga nada fuera del área A4 */
 }
 
+/* Mobile and tablet preview: show the complete CV within the available width. */
+@media (max-width: 1023px) {
+  #previewPanel {
+    overflow-x: hidden;
+  }
+
+  .a4-page {
+    width: 100%;
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 10mm 8mm;
+  }
+}
+
 /* Custom Scrollbar for form panel */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

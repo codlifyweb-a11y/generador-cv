@@ -60,10 +60,128 @@ let cvData = {
   ],
 };
 
+const mobileStepLabels = [
+  "Datos Personales",
+  "Perfil Profesional",
+  "Experiencia Laboral",
+  "Competencias",
+  "Educación",
+  "Formación Adicional",
+];
+
+let currentMobileStep = 0;
+let mobilePreviewVisible = false;
+
 function init() {
   loadSavedSections();
   loadFormData();
   updateCV();
+  window.addEventListener("resize", handleResponsiveLayout);
+  updateMobileNavigation();
+}
+
+function isSmallLayout() {
+  return window.matchMedia("(max-width: 1023px)").matches;
+}
+
+function updateMobileNavigation() {
+  const isMobileOrTablet = isSmallLayout();
+  const stepCards = document.querySelectorAll(".step-card");
+  const progress = document.getElementById("mobileProgress");
+  const progressLabel = document.getElementById("progressStepLabel");
+  const progressCount = document.getElementById("progressStepCount");
+  const progressBar = document.getElementById("progressBar");
+
+  stepCards.forEach((card, index) => {
+    const shouldHide =
+      isMobileOrTablet && !mobilePreviewVisible && index !== currentMobileStep;
+    card.classList.toggle("hidden", shouldHide);
+  });
+
+  if (progress) {
+    progress.classList.toggle(
+      "hidden",
+      !isMobileOrTablet || mobilePreviewVisible,
+    );
+  }
+
+  if (progressLabel && progressCount && progressBar) {
+    const stepNumber = currentMobileStep + 1;
+    progressLabel.textContent = mobileStepLabels[currentMobileStep];
+    progressCount.textContent = `Paso ${stepNumber} de ${mobileStepLabels.length}`;
+    progressBar.style.width = `${(stepNumber / mobileStepLabels.length) * 100}%`;
+    progressBar.parentElement.setAttribute("aria-valuenow", stepNumber);
+  }
+
+  document.querySelectorAll(".btn-prev").forEach((button) => {
+    button.disabled = currentMobileStep === 0;
+  });
+}
+
+function handleResponsiveLayout() {
+  const formPanel = document.getElementById("formPanel");
+  const previewPanel = document.getElementById("previewPanel");
+
+  if (!isSmallLayout()) {
+    mobilePreviewVisible = false;
+    formPanel.classList.remove("hidden");
+    previewPanel.classList.remove("hidden", "flex");
+  } else if (!mobilePreviewVisible) {
+    formPanel.classList.remove("hidden");
+    previewPanel.classList.add("hidden");
+    previewPanel.classList.remove("flex");
+  }
+
+  updateMobileNavigation();
+}
+
+function nextStep() {
+  if (!isSmallLayout()) return;
+
+  if (currentMobileStep < mobileStepLabels.length - 1) {
+    currentMobileStep += 1;
+    updateMobileNavigation();
+    document
+      .getElementById("formPanel")
+      .scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  showMobilePreview();
+}
+
+function prevStep() {
+  if (!isSmallLayout() || mobilePreviewVisible) return;
+
+  if (currentMobileStep > 0) {
+    currentMobileStep -= 1;
+    updateMobileNavigation();
+    document
+      .getElementById("formPanel")
+      .scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function showMobilePreview() {
+  updateCV();
+  saveAllSectionsSilently();
+  mobilePreviewVisible = true;
+  document.getElementById("formPanel").classList.add("hidden");
+  const previewPanel = document.getElementById("previewPanel");
+  previewPanel.classList.remove("hidden");
+  previewPanel.classList.add("flex");
+  updateMobileNavigation();
+  previewPanel.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function returnToForm() {
+  mobilePreviewVisible = false;
+  document.getElementById("formPanel").classList.remove("hidden");
+  const previewPanel = document.getElementById("previewPanel");
+  previewPanel.classList.add("hidden");
+  previewPanel.classList.remove("flex");
+  updateMobileNavigation();
+  document.getElementById("formPanel").scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function loadFormData() {
@@ -406,13 +524,24 @@ function saveSection(section) {
   }
 }
 
+function saveSectionSilently(section) {
+  updateCV();
+
+  const data = getSectionsData()[section];
+  if (data === undefined) return;
+
+  try {
+    localStorage.setItem(`cv_${section}`, JSON.stringify(data));
+  } catch (error) {
+    console.error(`No se pudo guardar la sección "${section}".`, error);
+  }
+}
+
 function saveAllSections() {
   updateCV();
 
   try {
-    Object.entries(getSectionsData()).forEach(([section, data]) => {
-      localStorage.setItem(`cv_${section}`, JSON.stringify(data));
-    });
+    saveAllSectionsSilently();
     alert("Todas las secciones se guardaron correctamente.");
   } catch (error) {
     console.error("No se pudieron guardar todas las secciones.", error);
@@ -420,6 +549,12 @@ function saveAllSections() {
       "No se pudieron guardar todas las secciones. Revisa el almacenamiento del navegador.",
     );
   }
+}
+
+function saveAllSectionsSilently() {
+  Object.entries(getSectionsData()).forEach(([section, data]) => {
+    localStorage.setItem(`cv_${section}`, JSON.stringify(data));
+  });
 }
 
 function loadSavedSections() {
